@@ -2,7 +2,7 @@
 
 A from-scratch reproduction of **SMOTE: Synthetic Minority Over-sampling
 Technique** (Chawla, Bowyer, Hall & Kegelmeyer, *JAIR* 16, 2002). The SMOTE
-algorithm is re-implemented in NumPy — not imported from a library — and the
+algorithm is re-implemented in NumPy - not imported from a library - and the
 paper's ROC/AUC experimental protocol is rebuilt and run on the Pima Indian
 Diabetes dataset. My AUCs land within ~0.01 of the paper's, and my from-scratch
 SMOTE matches `imbalanced-learn` to within 0.001.
@@ -11,7 +11,7 @@ SMOTE matches `imbalanced-learn` to within 0.001.
 
 SMOTE is **not a model** — it is a *data transformer*. Imbalanced data breaks
 classifiers: if 5% of samples are the "positive" class, a model can score 95%
-accuracy by ignoring them entirely. The naive fix — duplicating minority rows —
+accuracy by ignoring them entirely. The naive fix - duplicating minority rows -
 just makes the classifier memorise those exact points (overfitting). SMOTE
 instead **invents new, plausible minority points** by interpolating between real
 neighbours:
@@ -76,7 +76,7 @@ where SMOTE's benefit is large, and are the natural next targets.
 
 ### Why my absolute numbers differ from the paper's
 
-The paper used **C4.5**; scikit-learn's `DecisionTreeClassifier` is **CART** —
+The paper used **C4.5**; scikit-learn's `DecisionTreeClassifier` is **CART** -
 different split criterion (gain ratio vs Gini) and different pruning. Reproduction
 means matching the **trend and methodology**, not the fourth decimal. Landing
 within ~0.01 across both curves, with the SMOTE-over-Under ordering preserved, is
@@ -94,7 +94,7 @@ an identical CV pipeline:
 | difference          | 0.0010      |
 
 Agreement to 0.001 confirms the implementation is faithful. (This uses a plain
-single-model AUC, so the number is lower than the swept-protocol AUC above — two
+single-model AUC, so the number is lower than the swept-protocol AUC above - two
 different measurements, deliberately.)
 
 ## Repo layout
@@ -131,7 +131,7 @@ python scripts/06_plot_roc.py
 ## What this demonstrates
 
 - Reading a primary source and translating pseudo-code into correct, tested code.
-- Understanding SMOTE as preprocessing, not a model — and why interpolation beats
+- Understanding SMOTE as preprocessing, not a model - and why interpolation beats
   duplication.
 - Avoiding resampling data leakage (a classic interview trap).
 - Rebuilding an experimental protocol faithfully, then reasoning honestly about
