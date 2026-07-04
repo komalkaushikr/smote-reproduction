@@ -6,7 +6,7 @@ Chawla et al. (2002), Section 4.2. Every block below is annotated with the
 line numbers of the paper's pseudo-code so you can hold the paper next to the
 code and see they say the same thing.
 
-KEY IDEA (say this in an interview):
+KEY IDEA:
   SMOTE is NOT a model. It is a data transformer. It takes the minority-class
   points and manufactures new, plausible minority points by walking a random
   fraction of the way from a real point toward one of its nearest minority

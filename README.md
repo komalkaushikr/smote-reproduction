@@ -9,7 +9,7 @@ SMOTE matches `imbalanced-learn` to within 0.001.
 
 ## What SMOTE is (and isn't)
 
-SMOTE is **not a model** — it is a *data transformer*. Imbalanced data breaks
+SMOTE is a *data transformer*. Imbalanced data breaks
 classifiers: if 5% of samples are the "positive" class, a model can score 95%
 accuracy by ignoring them entirely. The naive fix - duplicating minority rows -
 just makes the classifier memorise those exact points (overfitting). SMOTE
@@ -44,7 +44,7 @@ cross-validation fold in `src/evaluate.py`.
 
 A normal AUC sweeps the *decision threshold* of one trained model. The paper
 does something different (Section 5.2): it sweeps the *training-set class
-balance*. Each point on the ROC curve is a **separately trained classifier** —
+balance*. Each point on the ROC curve is a **separately trained classifier** -
 minority fixed at a chosen SMOTE level, majority randomly under-sampled at
 increasing degrees (10% … 2000%). Heavier under-sampling pushes the operating
 point up-and-right. Those points trace the curve; the area under it (trapezoid
@@ -70,7 +70,7 @@ tiny magnitude.
 
 Pima is the **least-skewed** dataset in the paper (1.87 : 1). The paper itself
 notes SMOTE barely helps here and that Naive Bayes actually beats SMOTE-C4.5 on
-Pima. A near-flat lift is the honest finding, not a bug — Pima is for proving the
+Pima. A near-flat lift is the honest finding, not a bug - Pima is for proving the
 machinery is correct. Datasets like Mammography or Satimage (far more skewed) are
 where SMOTE's benefit is large, and are the natural next targets.
 
@@ -94,7 +94,7 @@ an identical CV pipeline:
 | difference          | 0.0010      |
 
 Agreement to 0.001 confirms the implementation is faithful. (This uses a plain
-single-model AUC, so the number is lower than the swept-protocol AUC above - two
+single-model AUC, so the number is lower than the swept-protocol AUC above — two
 different measurements, deliberately.)
 
 ## Repo layout
@@ -131,7 +131,7 @@ python scripts/06_plot_roc.py
 ## What this demonstrates
 
 - Reading a primary source and translating pseudo-code into correct, tested code.
-- Understanding SMOTE as preprocessing, not a model - and why interpolation beats
+- Understanding SMOTE as preprocessing, not a model — and why interpolation beats
   duplication.
 - Avoiding resampling data leakage (a classic interview trap).
 - Rebuilding an experimental protocol faithfully, then reasoning honestly about
