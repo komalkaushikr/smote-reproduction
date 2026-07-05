@@ -94,7 +94,7 @@ an identical CV pipeline:
 | difference          | 0.0010      |
 
 Agreement to 0.001 confirms the implementation is faithful. (This uses a plain
-single-model AUC, so the number is lower than the swept-protocol AUC above — two
+single-model AUC, so the number is lower than the swept-protocol AUC above - two
 different measurements, deliberately.)
 
 ## Repo layout
@@ -131,7 +131,7 @@ python scripts/06_plot_roc.py
 ## What this demonstrates
 
 - Reading a primary source and translating pseudo-code into correct, tested code.
-- Understanding SMOTE as preprocessing, not a model — and why interpolation beats
+- Understanding SMOTE as preprocessing, not a model - and why interpolation beats
   duplication.
 - Avoiding resampling data leakage (a classic interview trap).
 - Rebuilding an experimental protocol faithfully, then reasoning honestly about
@@ -141,7 +141,7 @@ python scripts/06_plot_roc.py
 
 - Run on **Mammography** / **Satimage** where SMOTE's effect is large.
 - Add an **XGBoost** baseline and test whether SMOTE still helps a modern model
-  (often it helps far less — a strong talking point).
+  (often it helps far less - a strong talking point).
 
 ## Reference
 
