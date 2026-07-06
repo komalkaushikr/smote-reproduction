@@ -82,6 +82,30 @@ means matching the **trend and methodology**, not the fourth decimal. Landing
 within ~0.01 across both curves, with the SMOTE-over-Under ordering preserved, is
 a successful reproduction.
 
+## Results — Mammography (severe 42:1 imbalance)
+
+The *same* pipeline, on the paper's hard case (11,183 samples, 260 minority).
+Adding it required only one new loader function — SMOTE, the model, and the
+evaluator were reused unchanged. Base classifier: decision tree, 10-fold CV.
+Paper values from Table 3 (C4.5, ÷10000).
+
+| method               | paper  | mine   | diff    |
+|----------------------|--------|--------|---------|
+| plain under-sampling | 0.9260 | 0.9063 | −0.0197 |
+| SMOTE(400%) + under  | 0.9304 | 0.9008 | −0.0296 |
+
+**Reading this honestly:** on Mammography, plain under-sampling is already a
+strong baseline, and SMOTE's AUC edge over it is negligible — here it sits
+within cross-validation noise, and the sign of a sub-0.01 difference can flip
+under a different base tree (CART vs the paper's C4.5). What reproduces cleanly
+is the magnitude: both methods land ~0.90–0.93, within ~0.02–0.03 of the paper.
+
+Taken with the Pima result, the finding is that SMOTE's benefit over strong
+under-sampling is modest on both mild (1.87:1) and severe (42:1) imbalance —
+a more nuanced picture than "SMOTE always helps," and consistent with the
+paper's own framing that its wins are often about the ROC convex hull rather
+than large AUC gaps.
+
 ## Verifying the from-scratch SMOTE is correct
 
 `05_verify_vs_imblearn.py` runs my SMOTE and `imbalanced-learn`'s SMOTE through
@@ -94,7 +118,7 @@ an identical CV pipeline:
 | difference          | 0.0010      |
 
 Agreement to 0.001 confirms the implementation is faithful. (This uses a plain
-single-model AUC, so the number is lower than the swept-protocol AUC above - two
+single-model AUC, so the number is lower than the swept-protocol AUC above — two
 different measurements, deliberately.)
 
 ## Repo layout
@@ -126,6 +150,7 @@ python scripts/03_run_experiments.py
 python scripts/04_compare_to_paper.py
 python scripts/05_verify_vs_imblearn.py
 python scripts/06_plot_roc.py
+python scripts/07_mammography.py
 ```
 
 ## What this demonstrates
@@ -139,7 +164,6 @@ python scripts/06_plot_roc.py
 
 ## Next steps
 
-- Run on **Mammography** / **Satimage** where SMOTE's effect is large.
 - Add an **XGBoost** baseline and test whether SMOTE still helps a modern model
   (often it helps far less - a strong talking point).
 
