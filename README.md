@@ -3,7 +3,7 @@
 A from-scratch reproduction of **SMOTE: Synthetic Minority Over-sampling
 Technique** (Chawla, Bowyer, Hall & Kegelmeyer, *JAIR* 16, 2002). The SMOTE
 algorithm is re-implemented in NumPy - not imported from a library - and the
-paper's ROC/AUC experimental protocol is rebuilt and run on the Pima Indian
+paper's ROC/AUC experimental protocol is rebuilt and run on the Pima Indian Diabetes and Mammography datasets.
 Diabetes dataset. My AUCs land within ~0.01 of the paper's, and my from-scratch
 SMOTE matches `imbalanced-learn` to within 0.001.
 
@@ -71,8 +71,8 @@ tiny magnitude.
 Pima is the **least-skewed** dataset in the paper (1.87 : 1). The paper itself
 notes SMOTE barely helps here and that Naive Bayes actually beats SMOTE-C4.5 on
 Pima. A near-flat lift is the honest finding, not a bug - Pima is for proving the
-machinery is correct. Datasets like Mammography or Satimage (far more skewed) are
-where SMOTE's benefit is large, and are the natural next targets.
+machinery is correct. 
+Whether SMOTE's benefit grows on more skewed data is exactly what the Mammography experiment below tests.
 
 ### Why my absolute numbers differ from the paper's
 
@@ -125,19 +125,20 @@ different measurements, deliberately.)
 
 ```
 smote-reproduction/
-├── config.py                 # seeds, paths, protocol constants
+├── config.py                     # seeds, paths, protocol constants
 ├── requirements.txt
 ├── src/
-│   ├── smote.py              # ★ from-scratch SMOTE (annotated to paper line numbers)
-│   ├── data_loader.py        # uniform (X, y) loading
-│   └── evaluate.py           # ROC-sweep protocol + trapezoidal AUC
+│   ├── smote.py                  # ★ from-scratch SMOTE (annotated to paper line numbers)
+│   ├── data_loader.py            # uniform (X, y) loading
+│   └── evaluate.py               # ROC-sweep protocol + trapezoidal AUC
 └── scripts/
     ├── 01_download_data.py
-    ├── 02_explore.py         # confirm the imbalance
-    ├── 03_run_experiments.py # Under vs SMOTE curves -> results/pima_results.json
-    ├── 04_compare_to_paper.py# my AUCs vs Table 3
+    ├── 02_explore.py             # confirm the imbalance
+    ├── 03_run_experiments.py     # Under vs SMOTE curves -> results/pima_results.json
+    ├── 04_compare_to_paper.py    # my AUCs vs Table 3
     ├── 05_verify_vs_imblearn.py
-    └── 06_plot_roc.py        # results/pima_roc.png
+    └── 06_plot_roc.py            # results/pima_roc.png
+    └──  07_mammography.py        # Stage 6: run pipeline on Mammography (42:1)   
 ```
 
 ## Run it
@@ -161,6 +162,7 @@ python scripts/07_mammography.py
 - Avoiding resampling data leakage (a classic interview trap).
 - Rebuilding an experimental protocol faithfully, then reasoning honestly about
   why results diverge (C4.5 vs CART) instead of fudging them.
+- Testing a method across mild and severe imbalance, and reporting honestly when the benefit turns out modest - rather than cherry-picking the flattering result.
 
 ## Next steps
 
