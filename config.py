@@ -19,6 +19,10 @@ K_NEIGHBORS = 5
 # For Pima the paper's ROC curve uses 100% SMOTE (Figure 9: "100 SMOTE-C4.5").
 SMOTE_PERCENT_PIMA = 100
 
+# Mammography (severe 42:1 imbalance). Paper's displayed ROC curve uses 400%
+# SMOTE (Figure 17); best AUC in Table 3 is at 300%. We run 400% to match Fig 17.
+SMOTE_PERCENT_MAMMO = 400
+
 # Majority under-sampling levels swept to trace out the ROC curve (Section 5.2).
 UNDERSAMPLE_LEVELS = [10, 15, 25, 50, 75, 100, 125, 150, 175,
                       200, 300, 400, 500, 600, 700, 800, 1000, 2000]
