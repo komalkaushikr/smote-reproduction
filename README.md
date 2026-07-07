@@ -164,11 +164,6 @@ python scripts/07_mammography.py
   why results diverge (C4.5 vs CART) instead of fudging them.
 - Testing a method across mild and severe imbalance, and reporting honestly when the benefit turns out modest - rather than cherry-picking the flattering result.
 
-## Next steps
-
-- Add an **XGBoost** baseline and test whether SMOTE still helps a modern model
-  (often it helps far less - a strong talking point).
-
 ## Reference
 
 Chawla, N. V., Bowyer, K. W., Hall, L. O., & Kegelmeyer, W. P. (2002).
