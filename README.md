@@ -7,7 +7,7 @@ paper's ROC/AUC experimental protocol is rebuilt and run on the Pima Indian Diab
 Diabetes dataset. My AUCs land within ~0.01 of the paper's, and my from-scratch
 SMOTE matches `imbalanced-learn` to within 0.001.
 
-## What SMOTE is (and isn't)
+## What SMOTE is ?
 
 SMOTE is a *data transformer*. Imbalanced data breaks
 classifiers: if 5% of samples are the "positive" class, a model can score 95%
